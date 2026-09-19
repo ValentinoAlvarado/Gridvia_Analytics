@@ -1,0 +1,36 @@
+@startuml Nomyra_Bloques_Funcionales
+' === DIAGRAMA 1A - BLOQUES FUNCIONALES (ABSTRACTO) ===
+' Para las REIVINDICACIONES de la solicitud de patente
+' Sistema Nomyra Analytics / IMPULSO 2G
+' Nivel: funcional, sin nombrar componentes comerciales
+
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam rectangle {
+  BorderColor #0d3b3b
+  BackgroundColor #E1F5EE
+}
+
+title Sistema integrado de medicion, pronostico y gestion energetica en sitio
+
+package "Dispositivo en sitio" as sitio {
+  rectangle "Modulo de medicion\nbidireccional trifasica\n(flujo con signo)" as med #FCEBEB
+  rectangle "Barrera de\naislamiento galvanico" as ais #EEEDFE
+  rectangle "Modulo de procesamiento\nembebido" as proc #E1F5EE
+  rectangle "Modulo de gestion de\ncargas diferibles" as carga #FAEEDA
+  rectangle "Operacion resiliente offline\n(buffer local + pronostico cacheado)" as offline #E6F1FB
+}
+
+cloud "Servidor en nube\nModelo de pronostico\nprobabilistico day-ahead" as nube #EAF3DE
+
+med --> ais : senales de medicion
+ais --> proc : datos aislados
+proc --> carga : comandos de control
+proc <--> nube : consulta pronostico (inalambrico)
+proc --> offline : cachea estado y pronostico
+offline --> proc : sirve datos en interrupcion
+
+
+@enduml

@@ -1,0 +1,45 @@
+# === Datos crudos y derivados (no van al repo) ===
+data/raw/
+data/interim/
+data/processed/
+data/outputs/
+
+# === Credenciales y secrets ===
+.cdsapirc
+.env
+*.key
+*_secret*
+
+# === Python ===
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# === Jupyter ===
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# === PyCharm / IDE ===
+.idea/
+.vscode/
+*.iml
+
+# === Sistema operativo ===
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# === Archivos grandes específicos del proyecto ===
+*.nc
+*.parquet
+*.pkl
+*.h5
+models/
+.om_cache.sqlite
+
+cookie.txt

@@ -1,0 +1,40 @@
+# ============================================================
+# Gridvia Analytics — Configuración base
+# Todo lo que estaba hardcodeado en las celdas vive aquí.
+# ============================================================
+
+periodo:
+  inicio: "2018-01-01"      # celda 4: ANIO_INI, MES_INI
+  fin:    "2026-05-01"      # celda 4: ANIO_FIN, MES_FIN
+
+paths:
+  raw:       "data/raw"
+  interim:   "data/interim"
+  processed: "data/processed"
+  coes_csv:  "data/raw/coes_csv"
+  era5_land: "data/raw/era5_land"
+  era5_tcc:  "data/raw/era5_tcc"
+  fichas:    "data/raw/fichas"
+  models:    "models"
+  figures:   "reports/figures"
+
+# --- Resolución temporal (la distinción nativa vs salida) ---
+resolucion:
+  coes_nativa:  "15min"     # COES entrega 15 min
+  coes_salida:  "1h"        # exp01: resampleado a 1h
+  era5:         "1h"        # ERA5-Land nativo 1h
+  solcast:      "15min"     # exp02: granularidad fina recuperada
+
+# --- Limpieza física P vs GHI (celdas 14, 23, 24) ---
+limpieza:
+  umbral_gen:        0.05    # MW, inicio operativo real (celda 14)
+  umbral_meses:      18      # inclusión de planta (Chen 2026)
+  ghi_alto:          200.0   # W/m2, luz inequívoca (celda 23)
+  ghi_cero:          0.001   # W/m2, numéricamente cero
+  pct_nominal_min:   0.01    # 1% capacidad nominal
+  pct_horas_min:     0.80    # 80% horas para parada de día (celda 24)
+
+# --- Credenciales (rutas, no los secretos) ---
+credenciales:
+  cdsapirc: ".cdsapirc"      # celda 18
+  cookie_coes: "cookie.txt"  # celda 6

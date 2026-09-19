@@ -1,0 +1,66 @@
+@startuml Nomyra_Componentes_Reales
+' === DIAGRAMA 1B - COMPONENTES REALES (DETALLADO) ===
+' Para la DESCRIPCION DETALLADA de la solicitud de patente
+' Fiel a la BOM: ADE7758, ESP32-S3, ADuM1401, TEN20, etc.
+
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam componentStyle rectangle
+
+title Arquitectura de componentes - Medidor Nomyra (Rev. A)
+
+package "LADO RED (medicion, 220V, GND_RED)" as red #FCEBEB {
+  rectangle "3x Transformadores\nde corriente (CT)\nSCT-013-000" as ct
+  rectangle "3x Transformadores\nde potencial (PT)\n220:9V" as pt
+  rectangle "Front-end analogico\nburden 6.8R + filtros\n1k/33n + divisor 120k/4.42k" as fe
+  rectangle "ADE7758\nmedidor trifasico\ncon signo (bidireccional)" as ade
+  rectangle "Cristal 10 MHz\n(Y2)" as xtal
+}
+
+package "BARRERA" as bar #EEEDFE {
+  rectangle "ADuM1401\naislador SPI 4 canales\n(3 fwd + 1 rev)" as adum
+  rectangle "TEN20-4811WIN\nfuente DC-DC aislada\n5V lado red" as ten
+}
+
+package "LADO LOGICO (seguro, 3.3V, GND_LOG)" as log #E6F1FB {
+  rectangle "ESP32-S3-WROOM-1\n(N8R8)\nMCU + WiFi" as esp
+  rectangle "microSD (SPI)\nbuffer / cache" as sd
+  rectangle "OLED I2C\n(SSD1306)" as oled
+  rectangle "RTC DS3231\n+ CR2032" as rtc
+  rectangle "Rele G2RL-1A\n+ driver 2N2219\n(carga diferible)" as rele
+  rectangle "Buck LM5164\n5V logico" as buck
+  rectangle "Proteccion ESD\nUSBLC6-4SC6" as esd
+}
+
+package "Proteccion de entrada AC" as prot #FAEEDA {
+  rectangle "Fusible F1 + MOV +\nGDT + filtro EMI (FL1)" as protac
+}
+
+cloud "Servidor Nomyra\nModelo AutoGluon\nAPI REST" as nube #EAF3DE
+
+protac --> pt
+protac --> ct
+ct --> fe
+pt --> fe
+fe --> ade
+xtal --> ade
+ade <--> adum : SPI aislado
+adum <--> esp : SPI
+ten --> ade : +5V_RED
+ten --> adum : +5V_RED (VDD2)
+buck --> esp : +5V_LOG -> 3V3
+esp <--> sd : SPI
+esp <--> oled : I2C
+esp <--> rtc : I2C
+esp --> rele : GPIO
+esd --> sd
+esp <--> nube : WiFi / HTTPS
+
+note bottom of log
+  El modelo NO reside en el dispositivo: vive en la nube.
+  El ESP32 consulta el pronostico por WiFi y lo cachea en
+  microSD para operar en modo isla si cae la conectividad.
+end note
+
+@enduml

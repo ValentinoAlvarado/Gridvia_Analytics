@@ -1,0 +1,45 @@
+# ============================================================
+# Fuentes de datos — endpoints, IDs y parámetros de descarga
+# Origen: celdas 4, 6, 18, 19, 30
+# ============================================================
+
+coes:
+  base_url: "https://www.coes.org.pe/Portal/mediciones/medidoresgeneracion"
+  tipo: "3"                  # CSV
+  # empresas: cadena larga de la celda 4 (mantener en archivo aparte si crece)
+  empresas_file: "conf/coes_empresas.txt"
+
+coes_fichas:                 # celda 30
+  base_url: "https://www.coes.org.pe/Portal/equipamiento/fichatecnica"
+  id_ficha: "35"
+  # IDs de elemento por planta (celda 30)
+  ids:
+    CARHUAQUERO:  23437
+    CLEMESI:      22189
+    INTIPAMPA:    17796
+    MAJES:        13402
+    MATARANI:     23256
+    MOQUEGUA_FV:  14762
+    PANAMERICANA: 13533
+    REPARTICION:  13399
+    RUBI:         18074
+    TACNA:        13503
+    YARUCAYA:     21771
+
+era5:                        # celda 18
+  dataset_land: "reanalysis-era5-land-timeseries"
+  dataset_tcc:  "reanalysis-era5-single-levels-timeseries"
+  variables:
+    - surface_solar_radiation_downwards
+    - 2m_temperature
+    - 2m_dewpoint_temperature
+    - 10m_u_component_of_wind
+    - 10m_v_component_of_wind
+    - surface_pressure
+    - total_precipitation
+
+elevacion:                   # celda 32
+  url: "https://api.open-elevation.com/api/v1/lookup"
+
+gis_osinergmin:              # celda 16
+  url: "https://gisem.osinergmin.gob.pe/serverosih/rest/services/Electricidad/ELECTRICIDAD/MapServer/11/query"

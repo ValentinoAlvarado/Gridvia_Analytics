@@ -1,0 +1,74 @@
+# ============================================================
+# Plantas FV del SEIN — coordenadas y metadatos
+# Origen: plantas.yaml original + celda 16 (GIS OSINERGMIN)
+# El MAPEO de nombres crudos -> canónicos está en consolidator.py
+# ============================================================
+
+plantas:
+  - item_id: MATARANI
+    lat: -16.740078
+    lon: -71.934723
+    inicio_csv: "2024-07-01"
+    nombre_gis: "MATARANI"
+
+  - item_id: MOQUEGUA_FV
+    lat: -17.542203
+    lon: -71.023918
+    inicio_csv: "2018-01-01"
+    nombre_gis: "MOQUEGUA SOLAR"
+
+  - item_id: PANAMERICANA
+    lat: -17.544892
+    lon: -71.039051
+    inicio_csv: "2018-01-01"
+    nombre_gis: "PANAMERICANA SOLAR"
+
+  - item_id: REPARTICION
+    lat: -16.571981
+    lon: -71.816628
+    inicio_csv: "2018-01-01"
+    nombre_gis: "REPARTICION"
+
+  - item_id: RUBI
+    lat: -17.244298
+    lon: -71.184246
+    inicio_csv: "2018-01-01"
+    nombre_gis: "RUBI"
+
+  - item_id: TACNA
+    lat: -17.994644
+    lon: -70.334853
+    inicio_csv: "2018-01-01"
+    nombre_gis: "TACNA SOLAR"
+
+  - item_id: YARUCAYA
+    lat: -11.038135
+    lon: -77.097295
+    inicio_csv: "2021-08-01"
+    nombre_gis: "YARUCAYA"
+
+  # Resto de las 11 plantas: completa con tus valores reales
+  # MAJES, INTIPAMPA, CLEMESI, CARHUAQUERO
+  - item_id: MAJES
+    lat: -16.434934
+    lon: -72.221941
+    inicio_csv: "2018-01-01"
+    nombre_gis: "MAJES"
+
+  - item_id: INTIPAMPA
+    lat: -17.231000
+    lon: -70.864138
+    inicio_csv: "2018-01-01"
+    nombre_gis: "INTIPAMPA"
+
+  - item_id: CLEMESI
+    lat: -17.243322
+    lon: -71.189617
+    inicio_csv: "2018-01-01"
+    nombre_gis: "CLEMESÍ"
+
+  - item_id: CARHUAQUERO
+    lat: -6.610074
+    lon: -79.251072
+    inicio_csv: "2018-01-01"
+    nombre_gis: "CARHUAQUERO"

@@ -1,0 +1,36 @@
+# ============================================================
+# Modelado — hiperparámetros walk-forward y evaluación
+# Origen: celdas 41, 43
+# ============================================================
+
+walkforward:
+  prediction_length: 24       # celda 41: PREDICTION_LENGTH
+  hist_min_dias:     365      # celda 41: HIST_MIN_DIAS
+  stride_dias:       90       # celda 41: STRIDE_DIAS
+  time_limit_fit:    null     # celda 41: TIME_LIMIT_FIT
+  preset:            "best_quality"
+  memory_limit_mb:   14000    # celda 41: AUTOGLUON_MEMORY_LIMIT_MB
+  eval_metric:       "SQL"
+
+covariables:                  # celda 41: COVARS
+  - ghi
+  - t_air
+  - hr
+  - wind_speed
+  - pressure
+  - precip_mm
+
+quantiles:                    # celda 43: QUANTILES
+  [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+
+# SHAP (celda 57)
+shap:
+  lags: [1,2,3,4,5,6,7,23,24,25,47,48,49,71,72,73,95,96,97,
+         119,120,121,143,144,145,167,168,169,
+         335,336,337,503,504,505,671,672,673,719,720,721]
+  target_quantile: 0.5
+
+# Evaluación por régimen de nubosidad (celda 63)
+nubosidad:
+  bins:   [-0.01, 0.2, 0.6, 1.01]
+  labels: ["Despejado", "Parc. Nublado", "Muy Nublado"]
